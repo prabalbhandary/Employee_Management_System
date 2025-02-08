@@ -16,7 +16,7 @@ const app = express();
 
 app.use(express.json());
 app.use(cors({
-  origin: "https://employee-management-system-lac-beta.vercel.app/",
+  origin: "https://employee-management-system-lac-beta.vercel.app",
   credentials: true
 }));
 app.use(morgan("dev"));
