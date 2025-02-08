@@ -24,7 +24,7 @@ const Settings = () => {
       return;
     } else {
       try {
-        const res = await axios.put("http://localhost:5000/api/v1/setting/change-password", setting, {
+        const res = await axios.put("https://employee-management-system-y3lq.vercel.app/api/v1/setting/change-password", setting, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },

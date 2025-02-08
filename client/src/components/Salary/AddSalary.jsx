@@ -38,7 +38,7 @@ const AddSalary = () => {
     e.preventDefault();
     try {
       const res = await axios.post(
-        `http://localhost:5000/api/v1/salary/add`,
+        `https://employee-management-system-y3lq.vercel.app/api/v1/salary/add`,
         salary,
         {
           headers: {
@@ -70,7 +70,6 @@ const AddSalary = () => {
           <h2 className="text-center text-2xl font-bold mb-6">Add Salary</h2>
           <form onSubmit={handleSubmit}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {/* Department */}
               <div>
                 <label
                   htmlFor="department"
@@ -92,8 +91,6 @@ const AddSalary = () => {
                   ))}
                 </select>
               </div>
-
-              {/* Employees */}
               <div>
                 <label
                   htmlFor="employeeId"
@@ -115,8 +112,6 @@ const AddSalary = () => {
                   ))}
                 </select>
               </div>
-
-              {/* Basic Salary */}
               <div>
                 <label
                   htmlFor="basicSalary"
@@ -133,8 +128,6 @@ const AddSalary = () => {
                   className="mt-1 p-2 block w-full border border-gray-300 rounded-md"
                 />
               </div>
-
-              {/* Allowances */}
               <div>
                 <label
                   htmlFor="allowances"
@@ -151,8 +144,6 @@ const AddSalary = () => {
                   className="mt-1 p-2 block w-full border border-gray-300 rounded-md"
                 />
               </div>
-
-              {/* Duductions */}
               <div>
                 <label
                   htmlFor="deductions"
@@ -169,7 +160,6 @@ const AddSalary = () => {
                   className="mt-1 p-2 block w-full border border-gray-300 rounded-md"
                 />
               </div>
-              {/* PayDate */}
               <div>
                 <label
                   htmlFor="date"
@@ -186,8 +176,6 @@ const AddSalary = () => {
                 />
               </div>
             </div>
-
-            {/* Submit Button */}
             <button
               type="submit"
               className="w-full mt-6 bg-teal-600 text-white hover:bg-teal-700 font-bold py-2 px-4 rounded"

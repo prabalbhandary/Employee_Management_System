@@ -17,7 +17,7 @@ const AddDepartment = () => {
     e.preventDefault();
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/v1/department/add",
+        "https://employee-management-system-y3lq.vercel.app/api/v1/department/add",
         department, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,

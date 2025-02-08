@@ -34,7 +34,7 @@ const EditEmployee = () => {
     const fetchEmployee = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:5000/api/v1/employee/get/${id}`,
+          `https://employee-management-system-y3lq.vercel.app/api/v1/employee/get/${id}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -65,7 +65,7 @@ const EditEmployee = () => {
     e.preventDefault();
     try {
       const res = await axios.put(
-        `http://localhost:5000/api/v1/employee/edit/${id}`,
+        `https://employee-management-system-y3lq.vercel.app/api/v1/employee/edit/${id}`,
         employee,
         {
           headers: {
