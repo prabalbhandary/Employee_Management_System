@@ -15,7 +15,7 @@ import attendanceRoutes from "./routes/attendanceRoutes.js";
 const app = express();
 
 app.use(cors({
-  origin: "https://employee-management-system-lac-beta.vercel.app",
+  origin: ["http://localhost:5173", "https://employee-management-system-lac-beta.vercel.app"],
   credentials: true
 }));
 app.use((req, res, next) => {

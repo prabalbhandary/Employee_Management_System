@@ -33,7 +33,7 @@ export const attCols = [
 export const AttendanceHelper = ({ status, employeeId, statusChanged }) => {
   const markEmployee = async (status, employeeId) => {
     try {
-        const res = await axios.put(`https://employee-management-system-y3lq.vercel.app/api/v1/attendance/update/${employeeId}`, { status }, {
+        const res = await axios.put(`http://localhost:5000/api/v1/attendance/update/${employeeId}`, { status }, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
             },

@@ -33,7 +33,7 @@ const AddEmployee = () => {
     });
     try {
         const res = await axios.post(
-          "https://employee-management-system-y3lq.vercel.app/api/v1/employee/add",
+          "http://localhost:5000/api/v1/employee/add",
           formDataObj, {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
