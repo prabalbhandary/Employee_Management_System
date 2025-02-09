@@ -26,10 +26,6 @@ const storage = new CloudinaryStorage({
 
 const upload = multer({ storage });
 
-import Employee from "../models/employeeModel.js";
-import User from "../models/userModel.js";
-import bcrypt from "bcrypt";
-
 const addEmployee = async (req, res) => {
   try {
     const { name, email, employeeId, dob, gender, maritalStatus, designation, department, salary, password, role } = req.body;
