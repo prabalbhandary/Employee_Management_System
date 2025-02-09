@@ -17,14 +17,16 @@ cloudinary.config({
 
 const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
-  params: {
-    folder: "employees",
-    allowedFormats: ["jpeg", "png", "jpg"],
-    public_id: (req, file) => Date.now() + "-" + file.originalname,
+  params: async (req, file) => {
+    return {
+      folder: "employees",
+      format: file.mimetype.split("/")[1],
+      public_id: Date.now() + "-" + file.originalname.split(".")[0],
+    };
   },
 });
 
-const upload = multer({ storage });
+const upload = multer({ storage: storage });
 
 const addEmployee = async (req, res) => {
   try {
@@ -65,7 +67,13 @@ const addEmployee = async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const profileImage = req.file ? req.file.path : "";
+    let profileImage = "";
+    let profileImagePublicId = "";
+
+    if (req.file) {
+      profileImage = req.file.path; // Secure URL
+      profileImagePublicId = req.file.filename; // Public ID
+    }
 
     const newUser = new User({
       name,
@@ -73,7 +81,9 @@ const addEmployee = async (req, res) => {
       password: hashedPassword,
       role,
       profileImage,
+      profileImagePublicId, // Store Public ID
     });
+
     const savedUser = await newUser.save();
 
     const newEmployee = new Employee({
@@ -93,13 +103,11 @@ const addEmployee = async (req, res) => {
       .status(201)
       .json({ success: true, message: "Employee added successfully" });
   } catch (error) {
-    return res
-      .status(500)
-      .json({
-        success: false,
-        message: "Internal Server Error",
-        error: error.message,
-      });
+    return res.status(500).json({
+      success: false,
+      message: "Internal Server Error",
+      error: error.message,
+    });
   }
 };
 
@@ -108,13 +116,11 @@ const getEmployees = async (req, res) => {
     const employees = await Employee.find()
       .populate("userId", { password: 0 })
       .populate("department");
-    return res
-      .status(200)
-      .json({
-        success: true,
-        message: "Employees fetched successfully",
-        employees,
-      });
+    return res.status(200).json({
+      success: true,
+      message: "Employees fetched successfully",
+      employees,
+    });
   } catch (error) {
     return res
       .status(500)
@@ -134,13 +140,11 @@ const getEmployeeById = async (req, res) => {
         .populate("userId", { password: 0 })
         .populate("department");
     }
-    return res
-      .status(200)
-      .json({
-        success: true,
-        message: "Employee fetched successfully",
-        employee,
-      });
+    return res.status(200).json({
+      success: true,
+      message: "Employee fetched successfully",
+      employee,
+    });
   } catch (error) {
     return res
       .status(500)
@@ -191,13 +195,11 @@ const getEmpByDepId = async (req, res) => {
   try {
     const { id } = req.params;
     const employees = await Employee.find({ department: id });
-    return res
-      .status(200)
-      .json({
-        success: true,
-        message: "Employees fetched successfully",
-        employees,
-      });
+    return res.status(200).json({
+      success: true,
+      message: "Employees fetched successfully",
+      employees,
+    });
   } catch (error) {
     return res
       .status(500)
