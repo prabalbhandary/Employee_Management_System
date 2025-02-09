@@ -40,8 +40,8 @@ const SalaryList = () => {
   }, []);
 
   const filSalary = (q) => {
-    const filRecords = salaries.filter((leave) =>
-      leave.employeeId.toLowerCase().includes(q.toLowerCase())
+    const filRecords = salaries.filter((salary) =>
+      salary?.employeeId.toLowerCase().includes(q.toLowerCase())
     );
     setFilSalaries(filRecords);
   };
