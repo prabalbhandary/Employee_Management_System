@@ -8,17 +8,22 @@ const EditDepartment = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const [depLoading, setDepLoading] = useState(false);
-  const [department, setDepartment] = useState([]);
+  const [department, setDepartment] = useState({
+    dep_name: "",
+    description: "",
+  });
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setDepartment({ ...department, [name]: value });
   };
+
   useEffect(() => {
     const fetchDepartments = async () => {
       setDepLoading(true);
       try {
         const res = await axios.get(
-          `hhttps://employee-management-system-8n86.onrender.com/api/v1/department/get/${id}`,
+          `https://employee-management-system-8n86.onrender.com/api/v1/department/get/${id}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -44,7 +49,8 @@ const EditDepartment = () => {
       }
     };
     fetchDepartments();
-  }, []);
+  }, [id]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -67,23 +73,24 @@ const EditDepartment = () => {
         error?.response?.data &&
         !error?.response?.data?.success
       ) {
-        toast.error(`Error: ${error.response.data.message}`);
+        toast.error(`Error: ${error?.response?.data?.message}`);
       } else {
         toast.error("Something went wrong. Please try again later");
       }
     }
   };
+
   return (
     <>
       {depLoading ? (
         <Spinner />
       ) : (
-        <div className="max-w-3xl mx-auto mt-10 bg-white p-8 rounded-md shadow-md w-96">
+        <div className="max-w-3xl mx-auto mt-10 bg-white p-8 rounded-md shadow-md w-full sm:w-96">
           <h2 className="text-2xl text-center font-bold mb-6">
             Edit Department
           </h2>
           <form onSubmit={handleSubmit}>
-            <div>
+            <div className="mb-4">
               <label
                 htmlFor="dep_name"
                 className="text-sm font-medium text-gray-700"
@@ -97,10 +104,10 @@ const EditDepartment = () => {
                 value={department.dep_name}
                 onChange={handleChange}
                 placeholder="Department Name"
-                className="mt-1 w-full p-2 border border-gray-300 rounded-md"
+                className="mt-1 w-full p-3 border border-gray-300 rounded-md"
               />
             </div>
-            <div className="mt-3">
+            <div className="mb-4">
               <label
                 htmlFor="description"
                 className="block text-sm font-medium text-gray-700"
@@ -114,12 +121,12 @@ const EditDepartment = () => {
                 onChange={handleChange}
                 placeholder="Department Description"
                 rows="4"
-                className="mt-1 w-full p-2 border border-gray-300 rounded-md block"
+                className="mt-1 w-full p-3 border border-gray-300 rounded-md block"
               />
             </div>
             <button
               type="submit"
-              className="w-full mt-6 bg-teal-600 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded"
+              className="w-full mt-6 bg-teal-600 hover:bg-teal-700 text-white font-bold py-3 px-4 rounded"
             >
               Edit Department
             </button>

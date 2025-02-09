@@ -10,7 +10,7 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     <AuthContext>
       <App />
-    </AuthContext>
     <ToastContainer position='top-right' theme='colored' />
+    </AuthContext>
   </StrictMode>,
 )

@@ -43,8 +43,15 @@ const EditEmployee = () => {
         );
         if (res?.data?.success) {
           toast.success(res?.data?.message);
-          const employee = res?.data?.employee
-          setEmployee((prev) => ({...prev, name: employee.userId.name, maritalStatus: employee.maritalStatus, designation: employee.designation, salary: employee.salary, department: employee.department}));
+          const employee = res?.data?.employee;
+          setEmployee((prev) => ({
+            ...prev,
+            name: employee.userId.name,
+            maritalStatus: employee.maritalStatus,
+            designation: employee.designation,
+            salary: employee.salary,
+            department: employee.department,
+          }));
         }
       } catch (error) {
         if (
@@ -93,7 +100,7 @@ const EditEmployee = () => {
   return (
     <>
       {departments && employee ? (
-        <div className="max-w-4xl mx-auto mt-10 bg-white p-8 rounded-md shadow-md">
+        <div className="max-w-4xl mx-auto mt-10 bg-white p-6 sm:p-8 rounded-md shadow-md">
           <h2 className="text-center text-2xl font-bold mb-6">Edit Employee</h2>
           <form onSubmit={handleSubmit}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -174,6 +181,7 @@ const EditEmployee = () => {
                   className="mt-1 p-2 block w-full border border-gray-300 rounded-md"
                 />
               </div>
+
               {/* Department */}
               <div className="col-span-2">
                 <label

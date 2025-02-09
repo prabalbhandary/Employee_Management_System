@@ -9,16 +9,19 @@ const AddDepartment = () => {
     dep_name: "",
     description: "",
   });
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setDepartment({ ...department, [name]: value });
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const res = await axios.post(
         "https://employee-management-system-8n86.onrender.com/api/v1/department/add",
-        department, {
+        department,
+        {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
@@ -40,13 +43,12 @@ const AddDepartment = () => {
       }
     }
   };
+
   return (
-    <div className="max-w-3xl mx-auto mt-10 bg-white p-8 rounded-md shadow-md w-96">
-      <h2 className="text-2xl text-center font-bold mb-6">
-        Add New Department
-      </h2>
+    <div className="max-w-md mx-auto mt-10 bg-white p-6 rounded-md shadow-md w-full">
+      <h2 className="text-2xl text-center font-bold mb-6">Add New Department</h2>
       <form onSubmit={handleSubmit}>
-        <div>
+        <div className="mb-4">
           <label
             htmlFor="dep_name"
             className="text-sm font-medium text-gray-700"
@@ -60,10 +62,10 @@ const AddDepartment = () => {
             value={department.dep_name}
             onChange={handleChange}
             placeholder="Department Name"
-            className="mt-1 w-full p-2 border border-gray-300 rounded-md"
+            className="mt-1 w-full p-3 border border-gray-300 rounded-md"
           />
         </div>
-        <div className="mt-3">
+        <div className="mb-4">
           <label
             htmlFor="description"
             className="block text-sm font-medium text-gray-700"
@@ -77,7 +79,7 @@ const AddDepartment = () => {
             onChange={handleChange}
             placeholder="Department Description"
             rows="4"
-            className="mt-1 w-full p-2 border border-gray-300 rounded-md block"
+            className="mt-1 w-full p-3 border border-gray-300 rounded-md"
           />
         </div>
         <button

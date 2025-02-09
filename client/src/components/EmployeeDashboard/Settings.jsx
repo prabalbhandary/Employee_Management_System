@@ -13,10 +13,12 @@ const Settings = () => {
     newPassword: "",
     confirmPassword: "",
   });
+  
   const handleChange = (e) => {
     const { name, value } = e.target;
     setSetting({ ...setting, [name]: value });
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (setting.newPassword !== setting.confirmPassword) {
@@ -28,7 +30,7 @@ const Settings = () => {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
-        })
+        });
         if(res?.data?.success){
           toast.success(res?.data?.message);
           navigate(user?.role === "admin" ? "/admin-dashboard" : "/employee-dashboard");
@@ -46,11 +48,12 @@ const Settings = () => {
       }
     }
   };
+
   return (
-    <div className="max-w-3xl mx-auto mt-10 bg-white p-8 rounded-md shadow-md w-96">
-      <h2 className="text-2xl text-center font-bold mb-6">Change Password</h2>
+    <div className="max-w-96 mx-auto mt-6 sm:mt-10 bg-white p-6 sm:p-8 rounded-md shadow-md w-full sm:w-96">
+      <h2 className="text-xl sm:text-2xl text-center font-bold mb-6">Change Password</h2>
       <form onSubmit={handleSubmit}>
-        <div>
+        <div className="mb-4">
           <label
             htmlFor="oldPassword"
             className="text-sm font-medium text-gray-700"
@@ -66,7 +69,7 @@ const Settings = () => {
             className="w-full mt-1 p-2 border border-gray-300 rounded-md shadow-sm"
           />
         </div>
-        <div>
+        <div className="mb-4">
           <label
             htmlFor="newPassword"
             className="text-sm font-medium text-gray-700"
@@ -82,7 +85,7 @@ const Settings = () => {
             className="w-full mt-1 p-2 border border-gray-300 rounded-md shadow-sm"
           />
         </div>
-        <div>
+        <div className="mb-4">
           <label
             htmlFor="confirmPassword"
             className="text-sm font-medium text-gray-700"

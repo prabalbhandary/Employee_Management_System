@@ -68,6 +68,7 @@ const DepartmentList = () => {
     );
     setFilteredData(records);
   };
+
   return (
     <>
       {depLoading ? (
@@ -77,22 +78,28 @@ const DepartmentList = () => {
           <div className="text-center">
             <h3 className="text-2xl font-bold">Manage Departments</h3>
           </div>
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col sm:flex-row items-center justify-between mt-5 gap-4">
             <input
               type="text"
               placeholder="Search by Dep Name"
-              className="px-4 py-0.5 border"
+              className="px-4 py-2 border rounded-md w-full sm:w-1/2"
               onChange={filteredDep}
             />
             <Link
               to="/admin-dashboard/departments/add-department"
-              className="px-4 py-1 bg-teal-600 rounded text-white hover:bg-teal-700"
+              className="px-4 py-2 bg-teal-600 rounded text-white hover:bg-teal-700 mt-4 sm:mt-0 w-full sm:w-auto text-center"
             >
               Add New Department
             </Link>
           </div>
-          <div className="mt-5">
-            <DataTable columns={depColumns} data={filteredData} pagination />
+          <div className="mt-5 overflow-x-auto">
+            <DataTable
+              columns={depColumns}
+              data={filteredData}
+              pagination
+              responsive
+              highlightOnHover
+            />
           </div>
         </div>
       )}

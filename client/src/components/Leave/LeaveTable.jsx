@@ -8,13 +8,17 @@ import Spinner from "../Spinner";
 const LeaveTable = () => {
   const [leaves, setLeaves] = useState(null);
   const [filLeaves, setFilLeaves] = useState(null);
+
   const fetchLeaves = async () => {
     try {
-      const res = await axios.get("https://employee-management-system-8n86.onrender.com/api/v1/leave", {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
+      const res = await axios.get(
+        "https://employee-management-system-8n86.onrender.com/api/v1/leave",
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
       if (res?.data?.success && res?.data?.leaves?.length > 0) {
         toast.success(res?.data?.message);
         let sno = 1;
@@ -44,16 +48,20 @@ const LeaveTable = () => {
   useEffect(() => {
     fetchLeaves();
   }, []);
-  
+
   const filterByInput = (e) => {
-    const data = leaves.filter(leave => leave?.employeeId.toLowerCase().includes(e.target.value.toLowerCase()));
+    const data = leaves.filter((leave) =>
+      leave?.employeeId.toLowerCase().includes(e.target.value.toLowerCase())
+    );
     setFilLeaves(data);
-  }
+  };
 
   const filterByButton = (status) => {
-    const data = leaves.filter(leave => leave?.status.toLowerCase().includes(status.toLowerCase()));
+    const data = leaves.filter((leave) =>
+      leave?.status.toLowerCase().includes(status.toLowerCase())
+    );
     setFilLeaves(data);
-  }
+  };
 
   return (
     <>
@@ -62,26 +70,35 @@ const LeaveTable = () => {
           <div className="text-center">
             <h3 className="text-2xl font-bold">Manage Leaves</h3>
           </div>
-          <div className="flex justify-between items-center">
+          <div className="flex flex-col sm:flex-row justify-between items-center mt-4">
             <input
               type="text"
               placeholder="Search By Emp ID"
-              className="border px-4 py-0.5"
+              className="border px-4 py-2 mb-4 sm:mb-0 sm:w-1/3 rounded"
               onChange={filterByInput}
             />
-            <div className="space-x-3">
-              <button onClick={() => filterByButton("Pending")} className="px-4 py-1 text-white bg-teal-600 hover:bg-teal-700 rounded">
+            <div className="space-x-3 flex flex-wrap justify-center sm:justify-start">
+              <button
+                onClick={() => filterByButton("Pending")}
+                className="px-4 py-2 text-white bg-teal-600 hover:bg-teal-700 rounded mb-2 sm:mb-0"
+              >
                 Pending
               </button>
-              <button onClick={() => filterByButton("Approved")} className="px-4 py-1 text-white bg-teal-600 hover:bg-teal-700 rounded">
+              <button
+                onClick={() => filterByButton("Approved")}
+                className="px-4 py-2 text-white bg-teal-600 hover:bg-teal-700 rounded mb-2 sm:mb-0"
+              >
                 Approved
               </button>
-              <button onClick={() => filterByButton("Rejected")} className="px-4 py-1 text-white bg-teal-600 hover:bg-red-700 rounded">
+              <button
+                onClick={() => filterByButton("Rejected")}
+                className="px-4 py-2 text-white bg-teal-600 hover:bg-red-700 rounded mb-2 sm:mb-0"
+              >
                 Rejected
               </button>
             </div>
           </div>
-          <div className="mt-3">
+          <div className="mt-3 overflow-x-auto">
             <DataTable columns={cols} data={filLeaves} pagination />
           </div>
         </div>

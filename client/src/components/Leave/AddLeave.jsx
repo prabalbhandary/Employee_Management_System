@@ -13,7 +13,8 @@ const AddLeave = () => {
     startDate: "",
     endDate: "",
     reason: "",
-  });   
+  });
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setLeave({ ...leave, [name]: value });
@@ -45,10 +46,10 @@ const AddLeave = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto mt-10 bg-white p-8 rounded-md shadow-md">
-      <h2 className="text-2xl font-bold mb-6">Request for Leave</h2>
+    <div className="max-w-4xl mx-auto mt-6 sm:mt-10 bg-white p-6 sm:p-8 rounded-md shadow-md w-full sm:w-96">
+      <h2 className="text-xl sm:text-2xl font-bold text-center mb-6">Request for Leave</h2>
       <form onSubmit={handleSubmit}>
-        <div className="flex flex-col space-y-4">
+        <div className="space-y-4">
           <div>
             <label
               htmlFor="leaveType"
@@ -68,7 +69,8 @@ const AddLeave = () => {
               <option value="Annual Leave">Annual Leave</option>
             </select>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label
                 htmlFor="startDate"
@@ -99,22 +101,24 @@ const AddLeave = () => {
                 onChange={handleChange}
               />
             </div>
-            <div>
-              <label
-                htmlFor="reason"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Description
-              </label>
-              <textarea
-                name="reason"
-                id="reason"
-                placeholder="Reason for Leave"
-                className="mt-1 p-2 block w-full border border-gray-300 rounded-md"
-                onChange={handleChange}
-              ></textarea>
-            </div>
           </div>
+
+          <div>
+            <label
+              htmlFor="reason"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Description
+            </label>
+            <textarea
+              name="reason"
+              id="reason"
+              placeholder="Reason for Leave"
+              className="mt-1 p-2 block w-full border border-gray-300 rounded-md"
+              onChange={handleChange}
+            ></textarea>
+          </div>
+
           <button
             type="submit"
             className="w-full font-bold px-4 py-2 bg-teal-600 hover:bg-teal-700 text-white rounded-md"
