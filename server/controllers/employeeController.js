@@ -4,17 +4,26 @@ import User from "../models/userModel.js";
 import bcrypt from "bcrypt";
 import path from "path";
 import Department from "../models/departmentModel.js";
+import fs from "fs";
+import cloudinary from "cloudinary";
+import { CloudinaryStorage } from "multer-storage-cloudinary";
 
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, "public/uploads");
-    },
-    filename: (req, file, cb) => {
-        cb(null, Date.now() + path.extname(file.originalname));
+cloudinary.v2.config({
+    cloud_name: process.env.CLOUD_NAME,
+    api_key: process.env.CLOUD_API_KEY,
+    api_secret: process.env.CLOUD_API_SECRET
+});
+
+const storage = new CloudinaryStorage({
+    cloudinary: cloudinary.v2,
+    params: {
+        folder: "employees",
+        format: async (req, file) => "png",
+        public_id: (req, file) => Date.now() + "-" + file.originalname
     }
-})
+});
 
-const upload = multer({storage}); 
+const upload = multer({ storage });
 
 const addEmployee = async (req, res) => {
     try {
