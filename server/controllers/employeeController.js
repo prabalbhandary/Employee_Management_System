@@ -2,49 +2,80 @@ import multer from "multer";
 import Employee from "../models/employeeModel.js";
 import User from "../models/userModel.js";
 import bcrypt from "bcrypt";
-import path from "path";
-import Department from "../models/departmentModel.js";
-import fs from "fs";
-import cloudinary from "cloudinary";
 import { CloudinaryStorage } from "multer-storage-cloudinary";
+import { v2 as cloudinary } from "cloudinary";
 
-cloudinary.v2.config({
-    cloud_name: process.env.CLOUD_NAME,
-    api_key: process.env.CLOUD_API_KEY,
-    api_secret: process.env.CLOUD_API_SECRET
+import dotenv from "dotenv";
+
+dotenv.config();
+
+cloudinary.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.CLOUD_API_KEY,
+  api_secret: process.env.CLOUD_API_SECRET,
 });
 
+
+
+import multer from "multer";
+import { CloudinaryStorage } from "multer-storage-cloudinary";
+import cloudinary from "../config/cloudinary.js";
+
 const storage = new CloudinaryStorage({
-    cloudinary: cloudinary.v2,
-    params: {
-        folder: "employees",
-        format: async (req, file) => "png",
-        public_id: (req, file) => Date.now() + "-" + file.originalname
-    }
+  cloudinary: cloudinary,
+  params: {
+    folder: "employees",
+    allowedFormats: ["jpeg", "png", "jpg"],
+    public_id: (req, file) => Date.now() + "-" + file.originalname,
+  },
 });
 
 const upload = multer({ storage });
 
+import Employee from "../models/employeeModel.js";
+import User from "../models/userModel.js";
+import bcrypt from "bcrypt";
+
 const addEmployee = async (req, res) => {
-    try {
-        const {name, email, employeeId, dob, gender, maritalStatus, designation, department, salary, password, role} = req.body;
-        if(!name || !email || !employeeId || !department || !salary || !password || !role){
-            return res.status(400).json({success: false, message: "All fields are required. Please kindly fill it"});
-        }
-        const user = await User.findOne({email});
-        if(user){
-            return res.status(400).json({success: false, message: "User already exists"});
-        }
-        const hashedPassword = await bcrypt.hash(password, 10);
-        const newUser = new User({name, email, password: hashedPassword, role, profileImage: req.file ? req.file.filename : ""});
-        const savedUser = await newUser.save();
-        const newEmployee = new Employee({userId: savedUser._id, employeeId, dob, gender, maritalStatus, designation, department, salary});
-        await newEmployee.save();
-        return res.status(201).json({success: true, message: "Employee added successfully"});
-    } catch (error) { 
-        return res.status(500).json({success: false, message: "Internal Server Error"});
+  try {
+    const { name, email, employeeId, dob, gender, maritalStatus, designation, department, salary, password, role } = req.body;
+
+    if (!name || !email || !employeeId || !department || !salary || !password || !role) {
+      return res.status(400).json({ success: false, message: "All fields are required." });
     }
-}
+
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({ success: false, message: "User already exists" });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+    
+    const profileImage = req.file ? req.file.path : "";
+
+    const newUser = new User({ name, email, password: hashedPassword, role, profileImage });
+    const savedUser = await newUser.save();
+
+    const newEmployee = new Employee({
+      userId: savedUser._id,
+      employeeId,
+      dob,
+      gender,
+      maritalStatus,
+      designation,
+      department,
+      salary,
+    });
+
+    await newEmployee.save();
+    
+    return res.status(201).json({ success: true, message: "Employee added successfully" });
+  } catch (error) {
+    return res.status(500).json({ success: false, message: "Internal Server Error", error: error.message });
+  }
+};
+
+export { addEmployee };
 
 const getEmployees = async (req, res) => {
     try {

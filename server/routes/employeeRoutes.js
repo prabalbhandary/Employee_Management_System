@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get("/get", verifyUser, getEmployees);
 router.get("/get/:id", verifyUser, getEmployeeById)
-router.post("/add", verifyUser, upload.single("image"), addEmployee);
+router.post("/add", upload.single("image"), addEmployee);
 router.put("/edit/:id", verifyUser, editEmployee)
 router.get("/department/:id", verifyUser, getEmpByDepId)
 
