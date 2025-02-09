@@ -153,6 +153,10 @@ const App = () => {
             element={<AddLeave />}
           ></Route>
           <Route
+            path="/employee-dashboard/attendance/attendance-report"
+            element={<AttendanceReport />}
+          ></Route>
+          <Route
             path={`/employee-dashboard/salary/:id`}
             element={<SalaryList />}
           ></Route>

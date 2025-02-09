@@ -60,6 +60,18 @@ const EmployeeSidebar = () => {
           <span>Leaves</span>
         </NavLink>
         <NavLink
+          to={`/employee-dashboard/attendance/attendance-report`}
+          className={({ isActive }) =>
+            `${
+              isActive ? "bg-teal-500" : ""
+            } flex items-center space-x-4 py-2.5 px-4 rounded`
+          }
+          end
+        >
+          <AiOutlineFileText />
+          <span>Attendance Report</span>
+        </NavLink>
+        <NavLink
           to={`/employee-dashboard/salary/${user?._id}`}
           className={({ isActive }) =>
             `${
