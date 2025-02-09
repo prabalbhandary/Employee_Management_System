@@ -5,7 +5,21 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 const AddEmployee = () => {
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    employeeId: "",
+    dob: "",
+    gender: "",
+    maritalStatus: "",
+    designation: "",
+    department: "",
+    salary: "",
+    password: "",
+    role: "",
+    profileImage: null, // File input
+  });
+
   const [departments, setDepartments] = useState([]);
   const navigate = useNavigate();
 
@@ -20,7 +34,7 @@ const AddEmployee = () => {
   const handleChange = (e) => {
     const { name, value, files } = e.target;
     if (files) {
-      setFormData({ ...formData, [name]: files[0] }); // Ensure correct key
+      setFormData({ ...formData, [name]: files[0] });
     } else {
       setFormData({ ...formData, [name]: value });
     }
@@ -58,26 +72,27 @@ const AddEmployee = () => {
     }
   };
 
-  const InputField = ({ label, name, type, onChange }) => (
+  const InputField = ({ label, name, type }) => (
     <div>
       <label className="block text-sm font-medium text-gray-700">{label}</label>
       <input
         type={type}
         name={name}
-        onChange={onChange}
+        value={formData[name]} // Controlled input
+        onChange={handleChange}
         placeholder={`Enter ${label}`}
         className="mt-1 p-2 block w-full border border-gray-300 rounded-md"
       />
     </div>
   );
 
-  // Reusable Select Field Component
-  const SelectField = ({ label, name, options, onChange }) => (
+  const SelectField = ({ label, name, options }) => (
     <div>
       <label className="block text-sm font-medium text-gray-700">{label}</label>
       <select
         name={name}
-        onChange={onChange}
+        value={formData[name]} // Controlled select input
+        onChange={handleChange}
         className="mt-1 p-2 block w-full border border-gray-300 rounded-md"
       >
         <option value="">Select {label}</option>
@@ -95,54 +110,19 @@ const AddEmployee = () => {
       <h2 className="text-center text-2xl font-bold mb-6">Add New Employee</h2>
       <form onSubmit={handleSubmit}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <InputField
-            label="Name"
-            name="name"
-            type="text"
-            onChange={handleChange}
-          />
-          <InputField
-            label="Email"
-            name="email"
-            type="email"
-            onChange={handleChange}
-          />
-          <InputField
-            label="Employee ID"
-            name="employeeId"
-            type="text"
-            onChange={handleChange}
-          />
-          <InputField
-            label="Date of Birth"
-            name="dob"
-            type="date"
-            onChange={handleChange}
-          />
-          <SelectField
-            label="Gender"
-            name="gender"
-            options={["Male", "Female", "Other"]}
-            onChange={handleChange}
-          />
-          <SelectField
-            label="Marital Status"
-            name="maritalStatus"
-            options={["Single", "Married"]}
-            onChange={handleChange}
-          />
-          <InputField
-            label="Designation"
-            name="designation"
-            type="text"
-            onChange={handleChange}
-          />
+          <InputField label="Name" name="name" type="text" />
+          <InputField label="Email" name="email" type="email" />
+          <InputField label="Employee ID" name="employeeId" type="text" />
+          <InputField label="Date of Birth" name="dob" type="date" />
+          <SelectField label="Gender" name="gender" options={["Male", "Female", "Other"]} />
+          <SelectField label="Marital Status" name="maritalStatus" options={["Single", "Married"]} />
+          <InputField label="Designation" name="designation" type="text" />
+
           <div>
-            <label className="block text-sm font-medium text-gray-700">
-              Department
-            </label>
+            <label className="block text-sm font-medium text-gray-700">Department</label>
             <select
               name="department"
+              value={formData.department} // Controlled select input
               onChange={handleChange}
               className="mt-1 p-2 block w-full border border-gray-300 rounded-md"
             >
@@ -155,29 +135,12 @@ const AddEmployee = () => {
             </select>
           </div>
 
-          <InputField
-            label="Salary"
-            name="salary"
-            type="number"
-            onChange={handleChange}
-          />
-          <InputField
-            label="Password"
-            name="password"
-            type="password"
-            onChange={handleChange}
-          />
-          <SelectField
-            label="Role"
-            name="role"
-            options={["Admin", "Employee"]}
-            onChange={handleChange}
-          />
+          <InputField label="Salary" name="salary" type="number" />
+          <InputField label="Password" name="password" type="password" />
+          <SelectField label="Role" name="role" options={["Admin", "Employee"]} />
 
           <div>
-            <label className="block text-sm font-medium text-gray-700">
-              Upload Profile Image
-            </label>
+            <label className="block text-sm font-medium text-gray-700">Upload Profile Image</label>
             <input
               type="file"
               name="profileImage"
