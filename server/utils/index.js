@@ -14,6 +14,7 @@ import attendanceRoutes from "./routes/attendanceRoutes.js";
 import path from "path";
 
 import dotenv from "dotenv";
+
 dotenv.config();
 
 const app = express();
