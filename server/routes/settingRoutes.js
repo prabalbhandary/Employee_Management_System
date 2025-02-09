@@ -6,5 +6,4 @@ const router = express.Router();
 
 router.put("/change-password", verifyUser, changePassword);
 
-
 export default router;

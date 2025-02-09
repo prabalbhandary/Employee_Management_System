@@ -17,7 +17,6 @@ const AddEmployee = () => {
       setFormData({ ...formData, [name]: value });
     }
   };
-
   useEffect(() => {
     const getDepartments = async () => {
       const gDepartments = await fetchDepartments();
@@ -47,7 +46,11 @@ const AddEmployee = () => {
         navigate("/admin-dashboard/employees");
       }
     } catch (error) {
-      if (error?.response && error?.response?.data && !error?.response?.data?.success) {
+      if (
+        error?.response &&
+        error?.response?.data &&
+        !error?.response?.data?.success
+      ) {
         toast.error(`Error: ${error.response.data.message}`);
       } else {
         toast.error("Something went wrong. Please try again later");
@@ -56,79 +59,89 @@ const AddEmployee = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto mt-10 bg-white p-6 sm:p-8 rounded-md shadow-md w-full">
+    <div className="max-w-4xl mx-auto mt-10 bg-white p-8 rounded-md shadow-md">
       <h2 className="text-center text-2xl font-bold mb-6">Add New Employee</h2>
       <form onSubmit={handleSubmit}>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Name Field */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="name"
+              className="block text-sm font-medium text-gray-700"
+            >
               Name
             </label>
             <input
               type="text"
               id="name"
-              name="name"
               onChange={handleChange}
+              name="name"
               placeholder="Enter Name"
-              className="mt-1 p-3 block w-full border border-gray-300 rounded-md"
+              className="mt-1 p-2 block w-full border border-gray-300 rounded-md"
             />
           </div>
 
-          {/* Email Field */}
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium text-gray-700"
+            >
               Email
             </label>
             <input
               type="email"
               id="email"
-              name="email"
               onChange={handleChange}
+              name="email"
               placeholder="Enter Email"
-              className="mt-1 p-3 block w-full border border-gray-300 rounded-md"
+              className="mt-1 p-2 block w-full border border-gray-300 rounded-md"
             />
           </div>
 
-          {/* Employee ID Field */}
           <div>
-            <label htmlFor="employeeId" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="employeeId"
+              className="block text-sm font-medium text-gray-700"
+            >
               Employee ID
             </label>
             <input
               type="text"
               id="employeeId"
-              name="employeeId"
               onChange={handleChange}
+              name="employeeId"
               placeholder="Enter Employee ID"
-              className="mt-1 p-3 block w-full border border-gray-300 rounded-md"
+              className="mt-1 p-2 block w-full border border-gray-300 rounded-md"
             />
           </div>
 
-          {/* Date of Birth Field */}
           <div>
-            <label htmlFor="dob" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="dob"
+              className="block text-sm font-medium text-gray-700"
+            >
               Date of Birth
             </label>
             <input
               type="date"
               id="dob"
-              name="dob"
               onChange={handleChange}
-              className="mt-1 p-3 block w-full border border-gray-300 rounded-md"
+              name="dob"
+              className="mt-1 p-2 block w-full border border-gray-300 rounded-md"
             />
           </div>
 
-          {/* Gender Field */}
           <div>
-            <label htmlFor="gender" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="gender"
+              className="block text-sm font-medium text-gray-700"
+            >
               Gender
             </label>
             <select
               id="gender"
               name="gender"
               onChange={handleChange}
-              className="mt-1 p-3 block w-full border border-gray-300 rounded-md"
+              className="mt-1 p-2 block w-full border border-gray-300 rounded-md"
             >
               <option value="">Select Gender</option>
               <option value="male">Male</option>
@@ -137,16 +150,18 @@ const AddEmployee = () => {
             </select>
           </div>
 
-          {/* Marital Status Field */}
           <div>
-            <label htmlFor="maritalStatus" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="maritalStatus"
+              className="block text-sm font-medium text-gray-700"
+            >
               Marital Status
             </label>
             <select
               id="maritalStatus"
-              name="maritalStatus"
               onChange={handleChange}
-              className="mt-1 p-3 block w-full border border-gray-300 rounded-md"
+              name="maritalStatus"
+              className="mt-1 p-2 block w-full border border-gray-300 rounded-md"
             >
               <option value="">Select Marital Status</option>
               <option value="single">Single</option>
@@ -154,31 +169,35 @@ const AddEmployee = () => {
             </select>
           </div>
 
-          {/* Designation Field */}
           <div>
-            <label htmlFor="designation" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="designation"
+              className="block text-sm font-medium text-gray-700"
+            >
               Designation
             </label>
             <input
               type="text"
+              onChange={handleChange}
               id="designation"
               name="designation"
-              onChange={handleChange}
               placeholder="Enter Designation"
-              className="mt-1 p-3 block w-full border border-gray-300 rounded-md"
+              className="mt-1 p-2 block w-full border border-gray-300 rounded-md"
             />
           </div>
 
-          {/* Department Field */}
           <div>
-            <label htmlFor="department" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="department"
+              className="block text-sm font-medium text-gray-700"
+            >
               Department
             </label>
             <select
-              id="department"
               name="department"
               onChange={handleChange}
-              className="mt-1 p-3 block w-full border border-gray-300 rounded-md"
+              id="department"
+              className="mt-1 p-2 block w-full border border-gray-300 rounded-md"
             >
               <option value="">Select Department</option>
               {departments.map((dep) => (
@@ -189,46 +208,52 @@ const AddEmployee = () => {
             </select>
           </div>
 
-          {/* Salary Field */}
           <div>
-            <label htmlFor="salary" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="salary"
+              className="block text-sm font-medium text-gray-700"
+            >
               Salary
             </label>
             <input
               type="number"
               id="salary"
-              name="salary"
               onChange={handleChange}
+              name="salary"
               placeholder="Enter Salary"
-              className="mt-1 p-3 block w-full border border-gray-300 rounded-md"
+              className="mt-1 p-2 block w-full border border-gray-300 rounded-md"
             />
           </div>
 
-          {/* Password Field */}
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="password"
+              className="block text-sm font-medium text-gray-700"
+            >
               Password
             </label>
             <input
               type="password"
               id="password"
-              name="password"
               onChange={handleChange}
+              name="password"
               placeholder="Enter Password"
-              className="mt-1 p-3 block w-full border border-gray-300 rounded-md"
+              className="mt-1 p-2 block w-full border border-gray-300 rounded-md"
             />
           </div>
 
-          {/* Role Field */}
           <div>
-            <label htmlFor="role" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="role"
+              className="block text-sm font-medium text-gray-700"
+            >
               Role
             </label>
             <select
               id="role"
-              name="role"
               onChange={handleChange}
-              className="mt-1 p-3 block w-full border border-gray-300 rounded-md"
+              name="role"
+              className="mt-1 p-2 block w-full border border-gray-300 rounded-md"
             >
               <option value="">Select Role</option>
               <option value="admin">Admin</option>
@@ -236,9 +261,11 @@ const AddEmployee = () => {
             </select>
           </div>
 
-          {/* Profile Image Field */}
           <div>
-            <label htmlFor="profileImage" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="profileImage"
+              className="block text-sm font-medium text-gray-700"
+            >
               Upload Image
             </label>
             <input
@@ -246,7 +273,7 @@ const AddEmployee = () => {
               id="profileImage"
               name="image"
               accept="image/*"
-              className="mt-1 p-3 block w-full border border-gray-300 rounded-md"
+              className="mt-1 p-2 block w-full border border-gray-300 rounded-md"
               onChange={handleChange}
             />
           </div>
@@ -254,7 +281,7 @@ const AddEmployee = () => {
 
         <button
           type="submit"
-          className="w-full mt-6 bg-teal-600 text-white hover:bg-teal-700 font-bold py-3 px-4 rounded-md"
+          className="w-full mt-6 bg-teal-600 text-white hover:bg-teal-700 font-bold py-2 px-4 rounded"
         >
           Add Employee
         </button>

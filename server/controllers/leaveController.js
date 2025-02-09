@@ -33,8 +33,8 @@ const getLeave = async (req, res) => {
     const { id, role } = req.params;
     let leave;
     if (role === "admin") {
-        leave = await Leave.find({ employeeId: id });
-    }else {
+      leave = await Leave.find({ employeeId: id });
+    } else {
       const employee = await Employee.findOne({ userId: id });
       leave = await Leave.find({ employeeId: employee?._id });
     }
@@ -96,13 +96,11 @@ const getLeaveDetail = async (req, res) => {
         .json({ success: false, message: "Leave not found" });
     }
 
-    return res
-      .status(200)
-      .json({
-        success: true,
-        message: "Leave details fetched successfully",
-        leave,
-      });
+    return res.status(200).json({
+      success: true,
+      message: "Leave details fetched successfully",
+      leave,
+    });
   } catch (error) {
     return res
       .status(500)

@@ -4,7 +4,7 @@ import "colors";
 const connectDB = async () => {
   try {
     await mongoose.connect(process.env.DB_URI, {
-        dbName: process.env.DB_NAME
+      dbName: process.env.DB_NAME,
     });
     console.log(`MongoDB Connected: ${mongoose.connection.host}`.bgGreen.white);
   } catch (error) {

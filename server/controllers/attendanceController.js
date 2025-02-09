@@ -78,13 +78,11 @@ const attendanceReport = async (req, res) => {
       return result;
     }, {});
 
-    return res
-      .status(200)
-      .json({
-        success: true,
-        message: "Attendance fetched successfully",
-        groupData,
-      });
+    return res.status(200).json({
+      success: true,
+      message: "Attendance fetched successfully",
+      groupData,
+    });
   } catch (error) {
     return res
       .status(500)

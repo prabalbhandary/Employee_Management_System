@@ -32,7 +32,7 @@ const AttendanceReport = () => {
       );
       if (res?.data?.success) {
         toast.success(res?.data?.message);
-        if (skip === 0) {
+        if (skip == 0) {
           setReport(res?.data?.groupData);
         } else {
           setReport([...report, ...res?.data?.groupData]);
@@ -51,7 +51,6 @@ const AttendanceReport = () => {
       }
     }
   };
-
   useEffect(() => {
     fetchAttendanceReport();
   }, [skip, dateFilter]);
@@ -61,13 +60,13 @@ const AttendanceReport = () => {
   };
 
   return (
-    <div className="min-h-screen p-5 sm:p-10 bg-white">
+    <div className="min-h-screen p-10 bg-white">
       <h2 className="text-center text-2xl font-bold">Attendance Report</h2>
-      <div className="flex flex-col sm:flex-row items-center mt-4 space-x-0 sm:space-x-4">
-        <h2 className="text-xl font-semibold mb-2 sm:mb-0">Filter By Date: </h2>
+      <div className="flex space-x-4">
+        <h2 className="text-xl font-semibold">Filter By Date: </h2>
         <input
           type="date"
-          className="border border-gray-300 rounded px-2 py-1 w-full sm:w-auto"
+          className="border border-gray-300 rounded px-2 py-1"
           onChange={handleFilChange}
         />
       </div>
@@ -77,36 +76,34 @@ const AttendanceReport = () => {
         Object.entries(report).map(([date, record]) => (
           <div key={date} className="mt-4 border-b">
             <h2 className="text-xl font-semibold">{date}</h2>
-            <div className="overflow-x-auto">
-              <table className="min-w-full" border="1" cellPadding="10">
-                <thead>
-                  <tr>
-                    <th className="px-4 py-2">S.No</th>
-                    <th className="px-4 py-2">Employee ID</th>
-                    <th className="px-4 py-2">Name</th>
-                    <th className="px-4 py-2">Department</th>
-                    <th className="px-4 py-2">Status</th>
+            <table border="1" cellPadding="10">
+              <thead>
+                <tr>
+                  <th>S.No</th>
+                  <th>Employee ID</th>
+                  <th>Name</th>
+                  <th>Department</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {record.map((data, i) => (
+                  <tr key={data.employeeId}>
+                    <td>{i + 1}</td>
+                    <td>{data.employeeId}</td>
+                    <td>{data.employeeName}</td>
+                    <td>{data.departmentName}</td>
+                    <td>{data.status}</td>
                   </tr>
-                </thead>
-                <tbody>
-                  {record.map((data, i) => (
-                    <tr key={data.employeeId}>
-                      <td className="px-4 py-2">{i + 1}</td>
-                      <td className="px-4 py-2">{data.employeeId}</td>
-                      <td className="px-4 py-2">{data.employeeName}</td>
-                      <td className="px-4 py-2">{data.departmentName}</td>
-                      <td className="px-4 py-2">{data.status}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+                ))}
+              </tbody>
+            </table>
           </div>
         ))
       )}
       <button
         onClick={handleLoadMore}
-        className="mt-4 px-4 py-2 border bg-gray-100 hover:bg-gray-200 text-black font-semibold rounded w-full sm:w-auto"
+        className="px-4 py-2 border bg-gray-100 hover:bg-gray-200 text-black font-semibold rounded"
       >
         Load More
       </button>

@@ -7,7 +7,6 @@ const UserContext = createContext();
 const AuthContext = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-
   useEffect(() => {
     const verifiedUser = async () => {
       try {
@@ -23,12 +22,7 @@ const AuthContext = ({ children }) => {
           );
           if (res?.data?.success) {
             setUser(res?.data?.user);
-            toast.success(res?.data?.message, {
-              position: "bottom-center",
-              autoClose: 3000,
-              closeButton: true,
-              theme: "colored",
-            });
+            toast.success(res?.data?.message);
           }
         } else {
           setUser(null);
@@ -41,20 +35,10 @@ const AuthContext = ({ children }) => {
           !error?.response?.data?.success
         ) {
           setUser(null);
-          toast.error(`Error: ${error.response.data.message}`, {
-            position: "bottom-center",
-            autoClose: 3000,
-            closeButton: true,
-            theme: "colored",
-          });
+          toast.error(`Error: ${error.response.data.message}`);
         } else {
           setUser(null);
-          toast.error("Something went wrong. Please try again later", {
-            position: "bottom-center",
-            autoClose: 3000,
-            closeButton: true,
-            theme: "colored",
-          });
+          toast.error("Something went wrong. Please try again later");
         }
       } finally {
         setLoading(false);
@@ -62,26 +46,16 @@ const AuthContext = ({ children }) => {
     };
     verifiedUser();
   }, []);
-
   const login = (user) => {
     setUser(user);
-    toast.success("Welcome back!", {
-      autoClose: 3000,
-      closeButton: true,
-      theme: "colored",
-    });
   };
-
   const logout = () => {
-    toast.success(`We are happy to have you again in our site. Please visit again ${user?.name}`, {
-      autoClose: 3000,
-      closeButton: true,
-      theme: "colored",
-    });
+    toast.success(
+      `We are happy to have you again in our site. Please visit again ${user.name}`
+    );
     setUser(null);
     localStorage.removeItem("token");
   };
-
   return (
     <UserContext.Provider value={{ user, login, logout, loading }}>
       {children}

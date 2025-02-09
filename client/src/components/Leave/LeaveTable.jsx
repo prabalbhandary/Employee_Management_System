@@ -8,7 +8,6 @@ import Spinner from "../Spinner";
 const LeaveTable = () => {
   const [leaves, setLeaves] = useState(null);
   const [filLeaves, setFilLeaves] = useState(null);
-
   const fetchLeaves = async () => {
     try {
       const res = await axios.get(
@@ -29,7 +28,9 @@ const LeaveTable = () => {
           name: leave.employeeId?.userId?.name,
           leaveType: leave.leaveType,
           department: leave.employeeId?.department?.dep_name,
-          days: new Date(leave.endDate).getDate() - new Date(leave.startDate).getDate(),
+          days:
+            new Date(leave.endDate).getDate() -
+            new Date(leave.startDate).getDate(),
           status: leave.status,
           action: <LeaveButtons _id={leave._id} />,
         }));
@@ -70,35 +71,35 @@ const LeaveTable = () => {
           <div className="text-center">
             <h3 className="text-2xl font-bold">Manage Leaves</h3>
           </div>
-          <div className="flex flex-col sm:flex-row justify-between items-center mt-4">
+          <div className="flex justify-between items-center">
             <input
               type="text"
               placeholder="Search By Emp ID"
-              className="border px-4 py-2 mb-4 sm:mb-0 sm:w-1/3 rounded"
+              className="border px-4 py-0.5"
               onChange={filterByInput}
             />
-            <div className="space-x-3 flex flex-wrap justify-center sm:justify-start">
+            <div className="space-x-3">
               <button
                 onClick={() => filterByButton("Pending")}
-                className="px-4 py-2 text-white bg-teal-600 hover:bg-teal-700 rounded mb-2 sm:mb-0"
+                className="px-4 py-1 text-white bg-teal-600 hover:bg-teal-700 rounded"
               >
                 Pending
               </button>
               <button
                 onClick={() => filterByButton("Approved")}
-                className="px-4 py-2 text-white bg-teal-600 hover:bg-teal-700 rounded mb-2 sm:mb-0"
+                className="px-4 py-1 text-white bg-teal-600 hover:bg-teal-700 rounded"
               >
                 Approved
               </button>
               <button
                 onClick={() => filterByButton("Rejected")}
-                className="px-4 py-2 text-white bg-teal-600 hover:bg-red-700 rounded mb-2 sm:mb-0"
+                className="px-4 py-1 text-white bg-teal-600 hover:bg-red-700 rounded"
               >
                 Rejected
               </button>
             </div>
           </div>
-          <div className="mt-3 overflow-x-auto">
+          <div className="mt-3">
             <DataTable columns={cols} data={filLeaves} pagination />
           </div>
         </div>

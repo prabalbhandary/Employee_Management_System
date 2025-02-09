@@ -1,30 +1,33 @@
-import mongoose, {Schema} from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
-const salarySchema = new Schema({
+const salarySchema = new Schema(
+  {
     employeeId: {
-        type: Schema.Types.ObjectId,
-        ref: "Employee",
-        required: true
+      type: Schema.Types.ObjectId,
+      ref: "Employee",
+      required: true,
     },
     basicSalary: {
-        type: Number,
-        required: true
+      type: Number,
+      required: true,
     },
     allowances: {
-        type: Number
+      type: Number,
     },
     deductions: {
-        type: Number
+      type: Number,
     },
     netSalary: {
-        type: Number
+      type: Number,
     },
     payDate: {
-        type: Date,
-        required: true
-    }
-}, {timestamps: true})
+      type: Date,
+      required: true,
+    },
+  },
+  { timestamps: true }
+);
 
-const Salary = mongoose.model("Salary", salarySchema)
+const Salary = mongoose.model("Salary", salarySchema);
 
-export default Salary
+export default Salary;

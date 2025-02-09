@@ -20,7 +20,6 @@ export const depColumns = [
 
 export const DepartmentButtons = ({ _id, onDepartmentDelete }) => {
   const navigate = useNavigate();
-  
   const handleDelete = async (id) => {
     const confirm = window.confirm("Are you sure you want to delete this?");
     if (confirm) {
@@ -38,7 +37,11 @@ export const DepartmentButtons = ({ _id, onDepartmentDelete }) => {
           onDepartmentDelete();
         }
       } catch (error) {
-        if (error?.response && error?.response?.data && !error?.response?.data?.success) {
+        if (
+          error?.response &&
+          error?.response?.data &&
+          !error?.response?.data?.success
+        ) {
           toast.error(`Error: ${error.response.data.message}`);
         } else {
           toast.error("Something went wrong. Please try again later");
@@ -46,18 +49,19 @@ export const DepartmentButtons = ({ _id, onDepartmentDelete }) => {
       }
     }
   };
-
   return (
-    <div className="flex flex-col sm:flex-row sm:space-x-3 space-y-2 sm:space-y-0">
+    <div className="flex space-x-3">
       <button
-        onClick={() => navigate(`/admin-dashboard/departments/department/${_id}`)}
-        className="px-3 py-1 bg-teal-600 hover:bg-teal-700 text-white w-full sm:w-auto rounded"
+        onClick={() =>
+          navigate(`/admin-dashboard/departments/department/${_id}`)
+        }
+        className="px-3 py-1 bg-teal-600 hover:bg-teal-700 text-white"
       >
         Edit
       </button>
       <button
         onClick={() => handleDelete(_id)}
-        className="px-3 py-1 bg-red-600 hover:bg-red-700 text-white w-full sm:w-auto rounded"
+        className="px-3 py-1 bg-red-600 hover:bg-red-700 text-white"
       >
         Delete
       </button>

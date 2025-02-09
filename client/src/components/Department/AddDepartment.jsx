@@ -45,10 +45,12 @@ const AddDepartment = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto mt-10 bg-white p-6 rounded-md shadow-md w-full">
-      <h2 className="text-2xl text-center font-bold mb-6">Add New Department</h2>
+    <div className="max-w-full sm:max-w-3xl mx-auto mt-10 bg-white p-6 sm:p-8 rounded-md shadow-md">
+      <h2 className="text-2xl text-center font-bold mb-6">
+        Add New Department
+      </h2>
       <form onSubmit={handleSubmit}>
-        <div className="mb-4">
+        <div>
           <label
             htmlFor="dep_name"
             className="text-sm font-medium text-gray-700"
@@ -62,10 +64,10 @@ const AddDepartment = () => {
             value={department.dep_name}
             onChange={handleChange}
             placeholder="Department Name"
-            className="mt-1 w-full p-3 border border-gray-300 rounded-md"
+            className="mt-1 w-full p-2 border border-gray-300 rounded-md"
           />
         </div>
-        <div className="mb-4">
+        <div className="mt-3">
           <label
             htmlFor="description"
             className="block text-sm font-medium text-gray-700"
@@ -79,7 +81,7 @@ const AddDepartment = () => {
             onChange={handleChange}
             placeholder="Department Description"
             rows="4"
-            className="mt-1 w-full p-3 border border-gray-300 rounded-md"
+            className="mt-1 w-full p-2 border border-gray-300 rounded-md block"
           />
         </div>
         <button

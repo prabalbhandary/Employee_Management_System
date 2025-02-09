@@ -48,15 +48,12 @@ export const LeaveButtons = ({ _id }) => {
   const handleView = (id) => {
     navigate(`/admin-dashboard/leaves/leave/${id}`);
   };
-
   return (
-    <div className="flex flex-col sm:flex-row sm:space-x-3 space-y-2 sm:space-y-0">
-      <button
-        className="px-4 py-2 bg-teal-600 hover:bg-teal-700 text-white rounded w-full sm:w-auto"
-        onClick={() => handleView(_id)}
-      >
-        View
-      </button>
-    </div>
+    <button
+      className="px-4 py-1 bg-teal-600 hover:bg-teal-700 text-white rounded"
+      onClick={() => handleView(_id)}
+    >
+      View
+    </button>
   );
 };

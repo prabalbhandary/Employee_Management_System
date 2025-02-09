@@ -75,14 +75,14 @@ const Attendance = () => {
           <div className="text-center">
             <h3 className="text-2xl font-bold">Manage Attendance</h3>
           </div>
-          <div className="flex items-center justify-between mt-4 flex-col sm:flex-row">
+          <div className="flex items-center justify-between mt-4">
             <input
               type="text"
               placeholder="Search by EmpId"
-              className="px-4 py-2 border w-full sm:w-auto mb-4 sm:mb-0"
+              className="px-4 py-0.5 border"
               onChange={handleFil}
             />
-            <p className="text-xl sm:text-2xl mb-4 sm:mb-0">
+            <p className="text-2xl">
               Mark Employees for{" "}
               <span className="font-bold underline">
                 {new Date().toISOString().split("T")[0]}
@@ -90,12 +90,12 @@ const Attendance = () => {
             </p>
             <Link
               to="/admin-dashboard/attendance/attendance-report"
-              className="px-4 py-2 bg-teal-600 rounded text-white hover:bg-teal-700 w-full sm:w-auto"
+              className="px-4 py-1 bg-teal-600 rounded text-white hover:bg-teal-700"
             >
-              View Attendance Report
+              View Attendace Report
             </Link>
           </div>
-          <div className="mt-6 overflow-x-auto">
+          <div className="mt-6">
             <DataTable columns={attCols} data={filAttendance} pagination />
           </div>
         </div>

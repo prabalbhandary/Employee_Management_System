@@ -27,23 +27,18 @@ const getSummary = async (req, res) => {
     ]);
     const leaveSummary = {
       appliedFor: employeeAppliedForLeave.length,
-      approved:
-        leaveStatus.find((item) => item._id === "Approved")?.count || 0,
-      rejected:
-        leaveStatus.find((item) => item._id === "Rejected")?.count || 0,
-      pending:
-        leaveStatus.find((item) => item._id === "Pending")?.count || 0,
+      approved: leaveStatus.find((item) => item._id === "Approved")?.count || 0,
+      rejected: leaveStatus.find((item) => item._id === "Rejected")?.count || 0,
+      pending: leaveStatus.find((item) => item._id === "Pending")?.count || 0,
     };
-    return res
-      .status(200)
-      .json({
-        success: true,
-        message: "Summary fetched successfully",
-        totalEmployees,
-        totalDepartments,
-        totalSalary: totalSalaries[0]?.totalSalary || 0,
-        leaveSummary,
-      });
+    return res.status(200).json({
+      success: true,
+      message: "Summary fetched successfully",
+      totalEmployees,
+      totalDepartments,
+      totalSalary: totalSalaries[0]?.totalSalary || 0,
+      leaveSummary,
+    });
   } catch (error) {
     return res
       .status(500)

@@ -1,38 +1,41 @@
-import mongoose, {Schema} from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
-const employeeSchema = new Schema({
+const employeeSchema = new Schema(
+  {
     userId: {
-        type: Schema.Types.ObjectId,
-        ref: "User",
-        required: true,
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
     },
     employeeId: {
-        type: String,
-        required: true,
-        unique: true
+      type: String,
+      required: true,
+      unique: true,
     },
     dob: {
-        type: Date
+      type: Date,
     },
     gender: {
-        type: String
+      type: String,
     },
     maritalStatus: {
-        type: String
+      type: String,
     },
     designation: {
-        type: String
+      type: String,
     },
     department: {
-        type: Schema.Types.ObjectId,
-        ref: "Department",
-        required: true
+      type: Schema.Types.ObjectId,
+      ref: "Department",
+      required: true,
     },
     salary: {
-        type: Number,
-        required: true
-    }
-}, {timestamps: true});
+      type: Number,
+      required: true,
+    },
+  },
+  { timestamps: true }
+);
 
 const Employee = mongoose.model("Employee", employeeSchema);
 

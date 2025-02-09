@@ -11,7 +11,7 @@ const EditEmployee = () => {
     maritalStatus: "",
     designation: "",
     salary: 0,
-    department: ""
+    department: "",
   });
   const [departments, setDepartments] = useState(null);
   const navigate = useNavigate();
@@ -100,7 +100,7 @@ const EditEmployee = () => {
   return (
     <>
       {departments && employee ? (
-        <div className="max-w-4xl mx-auto mt-10 bg-white p-6 sm:p-8 rounded-md shadow-md">
+        <div className="max-w-4xl mx-auto mt-10 bg-white p-8 rounded-md shadow-md">
           <h2 className="text-center text-2xl font-bold mb-6">Edit Employee</h2>
           <form onSubmit={handleSubmit}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -181,7 +181,6 @@ const EditEmployee = () => {
                   className="mt-1 p-2 block w-full border border-gray-300 rounded-md"
                 />
               </div>
-
               {/* Department */}
               <div className="col-span-2">
                 <label
