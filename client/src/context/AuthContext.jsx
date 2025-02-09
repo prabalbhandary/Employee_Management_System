@@ -13,7 +13,7 @@ const AuthContext = ({ children }) => {
         const token = localStorage.getItem("token");
         if (token) {
           const res = await axios.get(
-            "http://localhost:5000/api/v1/auth/verify",
+            "https://employee-management-system-8n86.onrender.com/api/v1/auth/verify",
             {
               headers: {
                 Authorization: `Bearer ${token}`,

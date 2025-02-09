@@ -10,7 +10,7 @@ const LeaveTable = () => {
   const [filLeaves, setFilLeaves] = useState(null);
   const fetchLeaves = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/v1/leave", {
+      const res = await axios.get("https://employee-management-system-8n86.onrender.com/api/v1/leave", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },

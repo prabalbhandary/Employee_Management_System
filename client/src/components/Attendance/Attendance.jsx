@@ -17,7 +17,7 @@ const Attendance = () => {
     setLoading(true);
     try {
       const res = await axios.get(
-        "http://localhost:5000/api/v1/attendance/get",
+        "https://employee-management-system-8n86.onrender.com/api/v1/attendance/get",
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,

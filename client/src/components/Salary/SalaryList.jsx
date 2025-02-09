@@ -13,7 +13,7 @@ const SalaryList = () => {
   let sno = 1;
   const fetchSalaries = async () => {
     try {
-      const res = await axios.get(`http://localhost:5000/api/v1/salary/${id}/${user?.role}`, {
+      const res = await axios.get(`https://employee-management-system-8n86.onrender.com/api/v1/salary/${id}/${user?.role}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
