@@ -8,6 +8,7 @@ import {
   FaUsers,
 } from "react-icons/fa";
 import { useAuth } from "../../context/AuthContext";
+import { AiOutlineFileText } from "react-icons/ai";
 
 const EmployeeSidebar = () => {
   const {user} = useAuth()
