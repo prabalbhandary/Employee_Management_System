@@ -67,7 +67,7 @@ const addEmployee = async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    let profileImage = "";
+    const profileImage = req.file ? req.file.path : "";
     let profileImagePublicId = "";
 
     if (req.file) {
