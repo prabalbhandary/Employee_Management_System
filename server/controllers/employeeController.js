@@ -15,12 +15,6 @@ cloudinary.config({
   api_secret: process.env.CLOUD_API_SECRET,
 });
 
-
-
-import multer from "multer";
-import { CloudinaryStorage } from "multer-storage-cloudinary";
-import cloudinary from "../config/cloudinary.js";
-
 const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
@@ -74,8 +68,6 @@ const addEmployee = async (req, res) => {
     return res.status(500).json({ success: false, message: "Internal Server Error", error: error.message });
   }
 };
-
-export { addEmployee };
 
 const getEmployees = async (req, res) => {
     try {
