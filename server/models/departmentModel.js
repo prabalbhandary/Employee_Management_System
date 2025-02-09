@@ -3,6 +3,7 @@ import Employee from "./employeeModel.js";
 import Leave from "./leaveModel.js";
 import Salary from "./salaryModel.js";
 import User from "./userModel.js";
+import Attendance from "./attendanceModel.js";
 
 const departmentSchema = new mongoose.Schema(
   {
@@ -30,6 +31,7 @@ departmentSchema.pre(
       await Employee.deleteMany({ department: this._id });
       await Leave.deleteMany({ employeeId: { $in: empIds } });
       await Salary.deleteMany({ employeeId: { $in: empIds } });
+      await Attendance.deleteMany({ employeeId: { $in: empIds } });
       await User.deleteMany({ _id: { $in: userIds } });
 
       next();
